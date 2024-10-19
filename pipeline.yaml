@@ -1,0 +1,20 @@
+# Filename: pipeline.yaml
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: build-and-push-pipeline
+spec:
+  params:
+    - name: git-url
+      description: URL of the Git repository
+    - name: docker-image
+      description: Name of the Docker image to build
+  tasks:
+    - name: build-and-push-task
+      taskRef:
+        name: build-and-push
+      params:
+        - name: git-url
+          value: $(params.git-url)
+        - name: docker-image
+          value: $(params.docker-image)

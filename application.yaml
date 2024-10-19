@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "https://github.com/princegupta17/devops-makerble.git"
+    repoURL: "<your_github_repo_url>"
     targetRevision: main
     path: .
   destination:

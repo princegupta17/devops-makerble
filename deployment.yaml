@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: budget-app-container
-          image: princegupta17/budget-app:latest
+          image: <your_dockerhub_username>/<image_name>:latest
           env:
             - name: DATABASE_URL
-              value: "postgres://blog-app:prince%40123@postgres:5432/blog_app_development"
+              value: "postgres://<your_database_username>:<your_database_password>@postgres:5432/<your_database_name>"
             - name: HOSTS
               value: "budget-app.local"
           ports:

@@ -1,0 +1,13 @@
+# Filename: pipelinerun.yaml
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: build-and-push-run-4
+spec:
+  pipelineRef:
+    name: build-and-push-pipeline
+  params:
+    - name: git-url
+      value: "github_url_https"
+    - name: docker-image
+      value: docker.io/<your_docker_username>/<image_name>:latest

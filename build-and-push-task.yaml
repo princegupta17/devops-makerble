@@ -1,0 +1,38 @@
+# Filename: build-and-push-task.yaml
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-and-push
+spec:
+  params:
+    - name: git-url
+      description: URL of the Git repository
+      type: string
+    - name: docker-image
+      description: Name of the Docker image to build
+      type: string
+  steps:
+    - name: git-clone
+      image: alpine/git
+      script: |
+        git clone $(params.git-url) /workspace/source
+    - name: build-image
+      image: docker
+      script: |
+        docker build -t $(params.docker-image) /workspace/source
+    - name: push-image
+      image: docker
+      script: |
+        docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
+        docker push $(params.docker-image)
+      env:
+        - name: DOCKER_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: dockerhub-secret
+              key: username
+        - name: DOCKER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dockerhub-secret
+              key: password

@@ -23,9 +23,9 @@ default: &default
 
 development:
   <<: *default
-  database: blog_app_development # Updated to match your DB name
-  username: blog-app # Your DB username
-  password: prince@123 # Your DB password
+  database: <your_database_name> # Updated to match your DB name
+  username: <your_db_username> # Your DB username
+  password: <your_database_password> # Your DB password
   host: postgres # Host should match the Kubernetes service name
   port: 5432 # Default PostgreSQL port
 
