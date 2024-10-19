@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budget-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: budget-app
+  template:
+    metadata:
+      labels:
+        app: budget-app
+    spec:
+      containers:
+        - name: budget-app-container
+          image: princegupta17/budget-app:latest
+          env:
+            - name: DATABASE_URL
+              value: "postgres://blog-app:prince%40123@postgres:5432/blog_app_development"
+            - name: HOSTS
+              value: "budget-app.local"
+          ports:
+            - containerPort: 3000
